@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090b12" />
+  <meta name="description" content="Play real-time online chess with friends." />
+  <title>Shadow Chess — Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">♞</span><span>SHADOW<span class="brand-muted">CHESS</span><small>ONLINE ARENA</small></span></a>
+    <div class="connection"><span class="pulse" id="connectionDot"></span><span id="connectionText">Connecting…</span></div>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <div class="eyebrow"><span class="eyebrow-line"></span> THE BATTLE OF MINDS</div>
+      <h1>Make your <span>next move.</span></h1>
+      <p class="subtitle">A quiet board. A sharp mind. Your opponent is one invite away.</p>
+    </section>
+    <section class="lobby panel" id="lobby">
+      <div class="lobby-copy"><div class="mini-icon">♜</div><div><h2>Enter the arena</h2><p>Create a private room or join a friend with their code.</p></div></div>
+      <div class="lobby-actions">
+        <button class="btn btn-primary" id="createBtn"><span>＋</span> Create friend room</button>
+        <div class="ai-create"><label for="aiDifficulty">Computer level</label><select id="aiDifficulty" aria-label="Computer difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select><button class="btn btn-ai" id="aiBtn">♟ Play computer</button></div>
+        <div class="join-form"><input id="roomInput" maxlength="8" placeholder="ROOM CODE" aria-label="Room code" autocomplete="off"><button class="btn btn-secondary" id="joinBtn">Join room <span>↗</span></button></div>
+      </div>
+      <p class="error-text" id="lobbyError" role="status"></p>
+    </section>
+
+    <section class="game-layout hidden" id="game">
+      <div class="board-column">
+        <div class="matchbar panel">
+          <div class="match-label"><span class="live-dot"></span><div><strong>PRIVATE MATCH</strong><small id="roomLabel">ROOM ———</small></div></div>
+          <button class="icon-btn" id="copyBtn" title="Copy room invite" aria-label="Copy room invite">▣</button>
+        </div>
+        <div class="player-card panel" id="opponentCard"><div class="player-avatar avatar-dark">♚</div><div class="player-info"><strong id="opponentName">Opponent</strong><small id="opponentState">Waiting to join…</small></div><span class="turn-indicator" id="opponentTurn"></span></div>
+        <div class="board-frame">
+          <div class="rank-labels" aria-hidden="true"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div>
+          <div id="board" class="board" role="grid" aria-label="Chessboard"></div>
+          <div class="file-labels" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+        </div>
+        <div class="player-card panel self-card" id="selfCard"><div class="player-avatar avatar-light">♔</div><div class="player-info"><strong id="selfName">You · White</strong><small id="selfState">Your turn</small></div><span class="turn-indicator active" id="selfTurn"></span></div>
+        <div class="board-actions">
+          <button class="btn btn-secondary" id="flipBtn">⇅ Flip board</button>
+          <button class="btn btn-secondary" id="drawBtn">½ Offer draw</button>
+          <button class="btn btn-danger" id="resignBtn">⚑ Resign</button>
+        </div>
+      </div>
+      <aside class="side-column">
+        <div class="panel game-status"><div class="section-heading"><span class="heading-icon">◈</span><div><h3>Match status</h3><small>LIVE GAME</small></div></div><div class="status-main"><span class="status-orb" id="statusOrb">●</span><div><strong id="statusTitle">Waiting for opponent</strong><p id="statusDescription">Share your room code to begin.</p></div></div><div class="room-share"><span>ROOM CODE</span><strong id="shareCode">———</strong><button id="shareBtn">Copy invite ↗</button></div></div>
+        <div class="panel moves-panel"><div class="section-heading"><span class="heading-icon">≋</span><div><h3>Move history</h3><small>GAME NOTATION</small></div></div><div class="moves-list" id="movesList"><div class="empty-moves"><span>♟</span><p>Your match moves will<br>appear here.</p></div></div></div>
+        <div class="panel captured-panel"><div class="section-heading"><span class="heading-icon">♜</span><div><h3>Captured pieces</h3><small>TAKEN OFF THE BOARD</small></div></div><div class="captured-row"><span>White</span><div id="capturedWhite" class="captured-pieces">—</div></div><div class="captured-row"><span>Black</span><div id="capturedBlack" class="captured-pieces">—</div></div></div>
+        <button class="btn btn-new" id="newGameBtn">↻ &nbsp; Start new game</button>
+        <p class="side-footnote">Play fair. Think ahead. Enjoy the game.</p>
+      </aside>
+    </section>
+    <footer><span>♞ SHADOW CHESS</span><span>BUILT FOR THE LOVE OF THE GAME</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop hidden" id="promotionModal"><div class="modal panel"><h2>Promote your pawn</h2><p>Choose a piece for your promotion.</p><div class="promotion-options"><button data-piece="q">♛<small>Queen</small></button><button data-piece="r">♜<small>Rook</small></button><button data-piece="b">♝<small>Bishop</small></button><button data-piece="n">♞<small>Knight</small></button></div></div></div>
+  <div class="modal-backdrop hidden" id="confirmModal"><div class="modal panel"><h2 id="confirmTitle">Are you sure?</h2><p id="confirmText">This action cannot be undone.</p><div class="modal-actions"><button class="btn btn-secondary" id="cancelConfirm">Cancel</button><button class="btn btn-danger" id="acceptConfirm">Confirm</button></div></div></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" crossorigin="anonymous"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

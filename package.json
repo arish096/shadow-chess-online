@@ -1,0 +1,17 @@
+{
+  "name": "shadow-chess-online",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real-time online multiplayer chess with legal move validation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "chess.js": "^1.4.0",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
