@@ -140,11 +140,17 @@ This project is open for learning and development. Add a `LICENSE` file to speci
 
 ---
 
-## 👨‍💻 Developer
+## 👨‍💻 About the Developer
 
-Built by **[Arish Islam](https://github.com/arish096)** as a web development project exploring real-time multiplayer gameplay and interactive chess experiences.
+**Arish Islam** is a developer interested in building practical web applications, interactive experiences, and AI-powered solutions.
+
+This project reflects an interest in real-time web technologies, multiplayer systems, and creating engaging user experiences through modern web development.
 
 <p align="center">
-  <a href="https://github.com/arish096">GitHub Profile</a> ·
-  <a href="https://shadow-chess-online.onrender.com">Play the Game</a>
+  <a href="https://github.com/arish096">
+    <img src="https://img.shields.io/badge/GitHub-arish096-181717?style=for-the-badge&logo=github" alt="GitHub Profile"/>
+  </a>
+  <a href="https://shadow-chess-online.onrender.com">
+    <img src="https://img.shields.io/badge/Live_Demo-Play_Now-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo"/>
+  </a>
 </p>
